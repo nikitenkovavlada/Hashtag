@@ -6,19 +6,24 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
+    public float speed;
+    public float jumpForce;
+    public int maxHealth = 100;
+    public int currentHealth;
+    public bool grounded;
+
     public Transform trans;
     public Transform transSpawn;
     private Rigidbody2D rb;
-    public float speed;
-    public float jumpForce;
-    public bool grounded;
-    public int health = 100;
+
+
     private Vector2 originalXScale;
     static public Boolean trig=false ;
     private int dir = 1;
 
     private SpriteRenderer sr;
     public GameObject wall;
+    public HealthBar healthBar;
 
     public KeyCode right;
     public KeyCode left;
@@ -45,8 +50,8 @@ public class Main : MonoBehaviour
         originalXScale = transform.localScale;
         anim = GetComponent<Animator>();
 
-        
-        
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -54,36 +59,25 @@ public class Main : MonoBehaviour
     {
 
         Animations();
-
-        Jump();
+ 
         Move();
-        createWall();
+        Jump();
         GrabFlag();
+        TakeDamage();
+
+        CreateWall();
         ThrowTeleportBall();
-        
-        //2D Vector(x,y);
-
-
 
     }
 
-    private void Jump()
+    private void Animations()
     {
-        if (grounded)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                rb.AddForce(new Vector2(0, jumpForce));
-            }
-        }
+        anim.SetBool("Grounded", grounded);
+        anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x));
+
     }
 
-    private void createWall()
-    {
-       
-    }
-
-        private void Move()
+    private void Move()
     {
         if (Input.GetKeyUp(right) || Input.GetKeyUp(left) )
         {
@@ -104,7 +98,16 @@ public class Main : MonoBehaviour
 
         FlipX();
     }
-
+    private void Jump()
+    {
+        if (grounded)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                rb.AddForce(new Vector2(0, jumpForce));
+            }
+        }
+    }
     private void FlipX()
     {
         if (Input.GetKey(left))
@@ -118,8 +121,6 @@ public class Main : MonoBehaviour
         transform.localScale = new Vector3(dir * originalXScale.x, originalXScale.y);
 
     }
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
@@ -129,10 +130,6 @@ public class Main : MonoBehaviour
             rb.velocity = new Vector2 (rb.velocity.y, 0);
         }
     }
-
-   
-
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         print(collision.transform.tag);
@@ -143,12 +140,14 @@ public class Main : MonoBehaviour
 
     }
 
-
-    private void Animations()
+    private void TakeDamage()
     {
-        anim.SetBool("Grounded", grounded);
-        anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x));
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            currentHealth -= 20;
+            healthBar.SetHealth(currentHealth);
+        }
     }
 
     public void GrabFlag()
@@ -158,7 +157,6 @@ public class Main : MonoBehaviour
             GameObject.FindGameObjectWithTag("Flag").transform.position = transSpawn.transform.position;
         }
     }
-
     public void ThrowTeleportBall()
     {
         // 1) Spawn the ball ONCE when the key is first pressed
@@ -186,7 +184,8 @@ public class Main : MonoBehaviour
             ableToTelport = true;
         }
     }
+    private void CreateWall()
+    {
 
-
-
+    }
 }

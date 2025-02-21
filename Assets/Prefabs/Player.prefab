@@ -531,13 +531,20 @@ MonoBehaviour:
   transSpawn: {fileID: 4631156721367499472}
   speed: 5
   jumpForce: 500
+  maxHealth: 100
+  currentHealth: 0
   grounded: 0
-  health: 100
   wall: {fileID: 8913440121696785088, guid: 7b08502cb98e6794f9994d1c4ce663ab, type: 3}
+  healthBar: {fileID: 3448066769932345613, guid: 89b6cd9f14a6a1c40b17cb60ba08cf6a, type: 3}
   right: 100
   left: 97
+  grab: 0
+  teleport: 0
   playerCam: {fileID: 0}
   camyoffset: 2.7
+  TeleportBall: {fileID: 0}
+  TeleportingBall: {fileID: 0}
+  ThrowForce: 0
 --- !u!50 &1891023512253937197
 Rigidbody2D:
   serializedVersion: 4
