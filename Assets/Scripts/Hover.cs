@@ -15,7 +15,7 @@ public class Hover : MonoBehaviour
     {
         var mousePos = Input.mousePosition;
         mousePos.z = 10; // select distance = 10 units from the camera
-        Debug.Log(cam.ScreenToWorldPoint(mousePos));
+        //Debug.Log(cam.ScreenToWorldPoint(mousePos));
         Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
         obj.transform.position = new Vector3(Mathf.Round(worldPos.x - 0.5f) +0.5f , Mathf.Round(worldPos.y -0.5f) +0.5f , Mathf.Round(worldPos.z));
 

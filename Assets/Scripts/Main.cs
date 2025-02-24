@@ -50,6 +50,8 @@ public class Main : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         originalXScale = transform.localScale;
+
+        AttackRange.SetActive(attacking);
     }
 
     void Update()
@@ -87,7 +89,7 @@ public class Main : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        print(collision.transform.tag);
+        //print(collision.transform.tag);
         if (collision.transform.tag.Equals("Ground"))
         {
             grounded = false;

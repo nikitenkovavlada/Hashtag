@@ -13,10 +13,10 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
+
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        //Debug.Log(damage);
         if (currentHealth <= 0) { Die(); }
 
         healthBar.SetHealth(currentHealth);
@@ -26,11 +26,11 @@ public class Health : MonoBehaviour
         if (currentHealth + heal > maxHealth) { currentHealth = maxHealth; }
         else { currentHealth += heal; }
 
-        //Debug.Log(heal);
+        Debug.Log(heal);
         healthBar.SetHealth(currentHealth);
     }
     private void Die()
-    {   //Debug.Log("Died");
+    {   Debug.Log("Died");
         Destroy(gameObject);
     }
 }
