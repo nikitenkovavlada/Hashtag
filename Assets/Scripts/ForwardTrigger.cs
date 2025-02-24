@@ -2,41 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallTrigger : MonoBehaviour
+public class ForwardTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
         {
-            Main.trig = true;
+            Main.wallTriggered = true;
         }
-        
         if (collision.gameObject.tag.Equals("Flag"))
         {
-            Main.able_tograb_flag = true;
+            Main.ableToGrabFlag = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Ground"))
         {
-            Main.trig = false;
+            Main.wallTriggered = false;
         }
         if (collision.gameObject.tag.Equals("Flag"))
         {
-            Main.able_tograb_flag = false;
+            Main.ableToGrabFlag = false;
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
