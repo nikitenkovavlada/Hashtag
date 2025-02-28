@@ -19,6 +19,8 @@ public class Main : MonoBehaviour
 
     private float timeToAttack = 0.25f;
     private float timerAttack = 0;
+    public float attackRange = 1;
+    public int damage = 10;
 
 
     public bool grounded;
@@ -36,7 +38,7 @@ public class Main : MonoBehaviour
     public Camera playerCam;
     public float camyoffset;
 
-    public GameObject AttackRange;
+    public Transform attackPoint;
     public GameObject wall;
     public GameObject TeleportBall;
     public GameObject TeleportBallSpawn;
@@ -50,8 +52,6 @@ public class Main : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         originalXScale = transform.localScale;
-
-        AttackRange.SetActive(attacking);
     }
 
     void Update()
@@ -70,7 +70,6 @@ public class Main : MonoBehaviour
             {
                 timerAttack = 0;
                 attacking = false;
-                AttackRange.SetActive(attacking);
             }
         }
 
@@ -152,10 +151,19 @@ public class Main : MonoBehaviour
     
     private void Attack() {
 
-        if (Input.GetKeyDown(attack))
+        if (Input.GetKeyUp(attack))
         {
             attacking = true;
-            AttackRange.SetActive(attacking);
+
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+
+            foreach (Collider2D enemy in enemies) {
+                if ((enemy.GetComponent<Health>() != null) && (enemy.CompareTag("Enemy")))
+                {
+                    Health health = enemy.GetComponent<Health>();
+                    health.Damage(damage);
+                }
+            }
         }
     }
 
