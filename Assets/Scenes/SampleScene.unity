@@ -2000,6 +2000,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 53242790}
     - target: {fileID: 6621310018929302113, guid: 1088f31d5a7303f45a2ab1f8be3dcc2e, type: 3}
+      propertyPath: attackRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621310018929302113, guid: 1088f31d5a7303f45a2ab1f8be3dcc2e, type: 3}
       propertyPath: TeleportBall
       value: 
       objectReference: {fileID: 8089199129724326587, guid: f7988c6e3ad365a4aafd64dd8dc4d3a2, type: 3}

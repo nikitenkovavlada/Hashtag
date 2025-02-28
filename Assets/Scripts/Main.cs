@@ -161,6 +161,7 @@ public class Main : MonoBehaviour
                 if ((enemy.GetComponent<Health>() != null) && (enemy.CompareTag("Enemy")))
                 {
                     Health health = enemy.GetComponent<Health>();
+                    enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 10, 0), ForceMode2D.Impulse);
                     health.Damage(damage);
                 }
             }
