@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17e663382df2128448c0ec874f7bd4e9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - trans: {instanceID: 0}
+  - transSpawn: {instanceID: 0}
+  - playerCam: {instanceID: 0}
+  - TeleportBall: {fileID: 8089199129724326587, guid: f7988c6e3ad365a4aafd64dd8dc4d3a2, type: 3}
+  - TeleportBallSpawn: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
